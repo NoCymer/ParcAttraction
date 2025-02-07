@@ -1,25 +1,18 @@
-<div class="card">
-  <div class="card-header">
-    <h5 class="card-title" i18n>Welcome hte the amusement park website</h5>
-  </div>
-  <div class="card-body">
-    <table class="table table-bordered">
-      <thead class="thead-light">
-        <tr>
-          <th i18n>Attraction name</th>
-          <th i18n>Description</th>
-          <th i18n>Difficulty / 5</th>
-        </tr>
-      </thead>
-      <tbody>
-        <ng-container *ngFor="let attraction of attractions | async;">
-          <tr *ngIf="attraction.visible">
-            <td>{{attraction.nom}}</td>
-            <td>{{attraction.description}}</td>
-            <td>{{attraction.difficulte}} / 5</td>
-          </tr>
-        </ng-container>
-      </tbody>
-    </table>
+<div class="w-full m-4">
+  <h1 class="h1" i18n>Welcome to the amusement park website</h1>
+  <h1 class="h2 mb-4" i18n>Attractions List</h1>
+  
+  <div class="d-flex w-full gap-3">
+    <ng-container *ngFor="let attraction of attractions | async;">
+      <div *ngIf="attraction.visible" class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{attraction.nom}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Difficulty : {{attraction.difficulte}} / 5</h6>
+          <h6 class="card-text">{{attraction.description}}</h6>
+          <a (click)="router.navigate(['attractions', attraction.attraction_id])" class="btn btn-primary">Read more</a>
+        </div>
+      </div>
+    </ng-container>
   </div>
 </div>
+

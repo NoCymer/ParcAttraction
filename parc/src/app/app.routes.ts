@@ -34,7 +34,7 @@ export const routes: Routes = [
       component: AccueilComponent,
     },
     {
-      path: 'attraction/:id',
+      path: 'attractions/:id',
       component: AttractionComponent,
     },
     { path: '',   redirectTo: '/accueil', pathMatch: 'full' }, 

@@ -4,5 +4,5 @@ export interface ReviewInterface {
   name: string | null,
   surname: string | null, 
   rating: number,
-  comment: boolean
+  comment: string | null
 }
