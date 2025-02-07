@@ -13,6 +13,12 @@ export class AttractionService {
 
   }
 
+  public deleteAttraction(id: number) {
+    const url = `http://127.0.0.1:5000/attraction/${id}`
+    const data = this.dataService.deleteData(url);
+    return data;
+  }
+
   public getAttraction(id: number) : Observable<AttractionInterface> {
     const url = `http://127.0.0.1:5000/attraction/${id}`
     const data = this.dataService.getData(url);

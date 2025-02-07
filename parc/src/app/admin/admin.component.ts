@@ -1,43 +1,37 @@
-import { Component } from '@angular/core';
+import { Component, TemplateRef } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { AttractionInterface } from '../Interface/attraction.interface';
 import { AttractionService } from '../Service/attraction.service';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatButtonModule } from '@angular/material/button';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatSlideToggleModule, MatButtonModule, MatCardModule],
+  imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatSlideToggleModule, MatButtonModule, MatCardModule, FormsModule],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss'
 })
 export class AdminComponent {
 
   public formulaireAttractions: FormGroup[] = [];
+  public newAttraction: Partial<AttractionInterface> = this.blankAttraction();
 
-  constructor(public attractionService: AttractionService, public formBuilder: FormBuilder, private _snackBar: MatSnackBar)
-  {}
+  constructor(
+    public attractionService: AttractionService,
+    public formBuilder: FormBuilder,
+    private _snackBar: MatSnackBar,
+    public modalService: NgbModal,
+  ) {}
   
-  public attractions: Observable<AttractionInterface[]> = this.attractionService.getAllAttraction().pipe(tap((attractions:AttractionInterface[]) => {
-    attractions.forEach(attraction => {
-      this.formulaireAttractions.push(
-        new FormGroup({
-          attraction_id: new FormControl(attraction.attraction_id),
-          nom: new FormControl(attraction.nom, [Validators.required]),
-          description: new FormControl(attraction.description, [Validators.required]),
-          difficulte: new FormControl(attraction.difficulte),
-          visible: new FormControl(attraction.visible)
-        })
-      );
-    });
-  }));
+  public attractions: Observable<AttractionInterface[]> = this.getAttractions();
 
   public onSubmit(attractionFormulaire: FormGroup) {
     console.log(attractionFormulaire)
@@ -60,4 +54,77 @@ export class AdminComponent {
       })
     );
   }
+
+  getAttractions(): Observable<AttractionInterface[]> {
+    return this.attractionService.getAllAttraction().pipe(tap((attractions:AttractionInterface[]) => {
+      this.formulaireAttractions = [];
+      attractions.forEach(attraction => {
+        this.formulaireAttractions.push(
+          new FormGroup({
+            attraction_id: new FormControl(attraction.attraction_id),
+            nom: new FormControl(attraction.nom, [Validators.required]),
+            description: new FormControl(attraction.description, [Validators.required]),
+            difficulte: new FormControl(attraction.difficulte),
+            visible: new FormControl(attraction.visible)
+          })
+        );
+      });
+    }));
+  }
+
+    open(content: TemplateRef<any>) {
+      this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
+        (result) => {
+          console.log('se')
+          this.submitAttraction();
+          this.newAttraction = this.blankAttraction();
+        },
+      );
+    }
+    
+    openDeleteModal(content: TemplateRef<any>, id: number) {
+      this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
+        (result) => {
+          this.attractionService.deleteAttraction(id).subscribe(
+            {
+              next: (response) => {
+                console.log('Attraction deleted successfully:', response);
+                this.attractions = this.getAttractions();
+              },
+              error: (error) => {
+                console.error('Error deleting:', error);
+              }
+            }
+          )
+        },
+      );
+    }
+    
+  
+
+    submitAttraction() {
+      try{
+        let attraction = this.newAttraction as AttractionInterface;
+        
+        this.attractionService.postAttraction(attraction).subscribe({
+          next: (response) => {
+            console.log('Attraction posted successfully:', response);
+            this.attractions = this.getAttractions();
+          },
+          error: (error) => {
+            console.error('Error posting review:', error);
+          }
+        });
+      }
+      catch(e: any){ }
+    }
+  
+    blankAttraction(): Partial<AttractionInterface> {
+      return {
+        nom: "",
+        description: "",
+        visible: false,
+        difficulte: 0
+      };
+    }
 }

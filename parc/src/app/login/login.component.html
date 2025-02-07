@@ -1,18 +1,20 @@
-<div class="card">
-  <div class="card-header">
-    <h5 class="card-title"i18n>Admin page login</h5>
-  </div>
-  <div class="card-body">
-    <form [formGroup]="form" (ngSubmit)="login()" class="form">
-      <div class="mb-3">
-        <label for="name" class="form-label" i18n>Name</label>
-        <input type="text" class="form-control" id="name" formControlName="name">
-      </div>
-      <div class="mb-3">
-        <label for="password" class="form-label" i18n>Password</label>
-        <input type="password" class="form-control" id="password" formControlName="password">
-      </div>
-      <button type="submit" class="btn btn-outline-primary" i18n>Login</button>
-    </form>
+<div class="w-full d-flex justify-content-center mt-5">
+  <div class="card" style="width: 25rem;">
+    <div class="card-header">
+      <h5 class="card-title"i18n>Admin page login</h5>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="form" (ngSubmit)="login()" class="form">
+        <div class="mb-3">
+          <label for="name" class="form-label" i18n>Name</label>
+          <input type="text" class="form-control" id="name" formControlName="name">
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label" i18n>Password</label>
+          <input type="password" class="form-control" id="password" formControlName="password">
+        </div>
+        <button type="submit" class="btn btn-outline-primary" i18n>Login</button>
+      </form>
+    </div>
   </div>
 </div>

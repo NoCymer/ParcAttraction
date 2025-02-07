@@ -6,7 +6,7 @@ import { AttractionInterface } from '../Interface/attraction.interface';
 import { MatCardModule } from '@angular/material/card';
 import { ReviewService } from '../Service/review.service';
 import { ReviewInterface } from '../Interface/review.interface';
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
@@ -26,6 +26,7 @@ export class AttractionComponent {
   constructor(
     public attractionService: AttractionService,
     public reviewService: ReviewService,
+    public modalService: NgbModal,
     public route: ActivatedRoute
   ) {}
 
@@ -34,12 +35,6 @@ export class AttractionComponent {
     this.attraction = this.attractionService.getAttraction(this.attractionId);
     this.reviews = this.reviewService.getAllReview(this.attractionId);
   }
-  
-  public reviewAverageScore(reviews: ReviewInterface[]) {
-    return reviews.reduce((sum, num) => sum + num.rating, 0) / reviews.length;
-  }
-
-	private modalService = inject(NgbModal);
 
 	open(content: TemplateRef<any>) {
 		this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
@@ -50,7 +45,6 @@ export class AttractionComponent {
 		);
 	}
 
-
   blankReview(): Partial<ReviewInterface> {
     return {
       name: "",
@@ -60,15 +54,17 @@ export class AttractionComponent {
     };
   }
 
+  
+  reviewAverageScore(reviews: ReviewInterface[]) {
+    return reviews.reduce((sum, num) => sum + num.rating, 0) / reviews.length;
+  }
+
   reviewDisplayName(review: ReviewInterface) {
     let isAnonymous = !review.surname || !review.name;
     return (isAnonymous ? "Anonymous" : `${review.name} ${review.surname}`)
   }
 
   submitReview() {
-    console.log('Submitted Review:', this.newReview);
-    // Here, you'd typically call reviewService to submit the review:
-    // this.reviewService.addReview(this.newReview).subscribe();
     try{
       let review = this.newReview as ReviewInterface;
       
@@ -79,7 +75,6 @@ export class AttractionComponent {
         },
         error: (error) => {
           console.error('Error posting review:', error);
-          // Optionally show an error message to the user
         }
       });
     }
