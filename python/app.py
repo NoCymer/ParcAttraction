@@ -4,6 +4,7 @@ from flask_cors import CORS
 import request.request as req
 import controller.auth.auth as user
 import controller.attraction as attraction
+import controller.review as review
 
 app = Flask(__name__)
 CORS(app)
@@ -35,6 +36,19 @@ def getAllAttraction():
 @app.get('/attraction/<int:index>')
 def getAttraction(index):
     result = attraction.get_attraction(index)
+    return result, 200
+
+@app.post('/attraction/<int:index>/reviews')
+def addAttractionReview(index):
+    json = request.get_json()
+    result = review.add_attraction_review(index, json)
+    if (result):
+        return jsonify({"message": "Element ajouté.", "result": result}), 200
+    return jsonify({"message": "Erreur lors de l'ajout.", "result": result}), 500
+  
+@app.get('/attraction/<int:index>/reviews')
+def getAttractionReviews(index):
+    result = review.get_attraction_reviews(index)
     return result, 200
 
 @app.delete('/attraction/<int:index>')
