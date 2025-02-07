@@ -4,23 +4,23 @@
     <div class="card-body" *ngIf="attraction | async as attractionData">
       <h3 class="card-title" id="attractionName">{{attractionData.nom}}</h3>
       <p class="card-text" id="attractionDescription">{{attractionData.description}}</p>
-      <p class="card-text">Difficulty : <span id="attractionDifficulty">{{attractionData.difficulte}}</span> / 5</p>
+      <p class="card-text"i18n >Difficulty : {{attractionData.difficulte}} / 5</p>
 
       <!-- Add Rating Popover -->
-      <button id="addRatingBtn" type="button" class="btn btn-primary" (click)="open(content)" title="Add your rating">
+      <button id="addRatingBtn" type="button" class="btn btn-primary" (click)="open(content)" title="Add your rating" i18n>
         Add Review
       </button>
 
       <!-- Display Rating History -->
       <ng-container *ngIf="reviews | async as reviewsData">
         <div class="mt-4"  *ngIf="reviewsData.length > 0">
-          <h5>Rating</h5>
+          <h5 i18n>Rating</h5>
           <p>{{reviewAverageScore(reviewsData)}} / 5</p>
-          <h5>Reviews</h5>
+          <h5 i18n>Reviews</h5>
   
           <ul id="ratingHistory" class="list-group">
             <ng-container *ngFor="let review of reviewsData">
-              <li class="list-group-item"><strong>{{reviewDisplayName(review)}}</strong> - Rating: {{review.rating}} / 5 <p>{{review.comment}}</p></li>
+              <li class="list-group-item"><p i18n class="fw-bold">{{reviewDisplayName(review)}} - Rating: {{review.rating}} / 5 </p><p>{{review.comment}}</p></li>
             </ng-container>
           </ul>
         </div>
@@ -32,32 +32,32 @@
 <ng-template #content let-modal>
 
 	<div class="modal-header">
-		<h4 class="modal-title" id="modal-basic-title">Add a review</h4>
+		<h4 class="modal-title" id="modal-basic-title" i18n>Add a review</h4>
 		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
 	</div>
 
 	<div class="modal-body">
 		<form>
       <div>
-        <label for="nameInput">First Name (optional)</label>
-        <input [(ngModel)]="newReview.name" type="text" id="nameInput" name="name" class="form-control mb-3" placeholder="Enter your first name (optional)">
+        <label for="nameInput" i18n>First Name (optional)</label>
+        <input [(ngModel)]="newReview.name" type="text" id="nameInput" name="name" class="form-control mb-3" placeholder="Enter your first name (optional)" i18n-placeholder>
       </div>
       <div>
-        <label for="surnameInput">Surname (optional)</label>
-        <input [(ngModel)]="newReview.surname" type="text" id="surnameInput" name="surname" class="form-control mb-3" placeholder="Enter your surname (optional)">
+        <label for="surnameInput" i18n>Surname (optional)</label>
+        <input [(ngModel)]="newReview.surname" type="text" id="surnameInput" name="surname" class="form-control mb-3" placeholder="Enter your surname (optional)" i18n-placeholder>
       </div>
       <div>
-        <label for="ratingInput">Rate the Attraction</label>
-        <input [(ngModel)]="newReview.rating" type="number" name="rating" id="ratingInput" min="1" max="5" class="form-control mb-3" placeholder="Rate from 1 to 5">
+        <label for="ratingInput" i18n>Rate the Attraction</label>
+        <input [(ngModel)]="newReview.rating" type="number" name="rating" id="ratingInput" min="1" max="5" class="form-control mb-3" placeholder="Rate from 1 to 5" i18n-placeholder>
       </div>
       <div>
-        <label for="commentInput">Comment (optional)</label>
-        <textarea [(ngModel)]="newReview.comment" name="comment" id="commentInput" rows="3" class="form-control mb-3" placeholder="Write a comment (optional)"></textarea>
+        <label for="commentInput" i18n>Comment (optional)</label>
+        <textarea [(ngModel)]="newReview.comment" name="comment" id="commentInput" rows="3" class="form-control mb-3" placeholder="Write a comment (optional)" i18n-placeholder></textarea>
       </div>
 		</form>
 	</div>
 
 	<div class="modal-footer">
-		<button type="button" class="btn btn-success" (click)="modal.close('Save click')">Submit Review</button>
+		<button type="button" class="btn btn-success" (click)="modal.close('Save click')" i18n>Submit Review</button>
 	</div>
 </ng-template>

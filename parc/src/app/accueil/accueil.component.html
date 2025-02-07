@@ -7,9 +7,9 @@
       <div *ngIf="attraction.visible" class="card" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">{{attraction.nom}}</h5>
-          <h6 class="card-subtitle mb-2 text-muted">Difficulty : {{attraction.difficulte}} / 5</h6>
+          <h6 class="card-subtitle mb-2 text-muted" i18n>Difficulty : {{attraction.difficulte}} / 5</h6>
           <h6 class="card-text">{{attraction.description}}</h6>
-          <a (click)="router.navigate(['attractions', attraction.attraction_id])" class="btn btn-primary">Read more</a>
+          <a (click)="router.navigate(['attractions', attraction.attraction_id])" class="btn btn-primary" i18n>Read more</a>
         </div>
       </div>
     </ng-container>

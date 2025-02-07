@@ -22,6 +22,9 @@
     </li>
   </ul>
 </nav>
-
+<select (change)="switchLanguage($event)"> 
+  <option value="en" [selected]="currentLang === 'en'">English</option>
+  <option value="fr" [selected]="currentLang === 'fr'">Français</option>
+</select>
 
 <router-outlet></router-outlet>

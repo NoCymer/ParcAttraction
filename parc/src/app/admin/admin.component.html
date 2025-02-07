@@ -47,34 +47,34 @@
 <ng-template #content let-modal>
 
 	<div class="modal-header">
-		<h4 class="modal-title" id="modal-basic-title">Add an attraction</h4>
+		<h4 class="modal-title" id="modal-basic-title" i18n>Add an attraction</h4>
 		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
 	</div> 
  
 	<div class="modal-body">
 		<form>
       <div> 
-        <label for="nomInput">Name</label> 
-        <input [(ngModel)]="newAttraction.nom" type="text" id="nomInput" name="nom" class="form-control mb-3" placeholder="Name of the attraction">
+        <label for="nomInput" i18n>Name</label> 
+        <input [(ngModel)]="newAttraction.nom" type="text" id="nomInput" name="nom" class="form-control mb-3" placeholder="Name of the attraction" i18n-placeholder>
       </div>
       <div>
-        <label for="difficulteInput">Difficulty</label>
-        <input [(ngModel)]="newAttraction.difficulte" type="number" name="difficulte" id="difficulteInput" min="1" max="5" class="form-control mb-3" placeholder="Rate from 1 to 5">
+        <label for="difficulteInput" i18n>Difficulty</label>
+        <input [(ngModel)]="newAttraction.difficulte" type="number" name="difficulte" id="difficulteInput" min="1" max="5" class="form-control mb-3" placeholder="Rate from 1 to 5" i18n-placeholder>
       </div>
       <div>
-        <label for="visibleInput" class="d-block">Visible</label> 
-        <input type="checkbox" [(ngModel)]="newAttraction.visible" name="visible" id="visibleInput" rows="3" class="form-check-input mb-3" placeholder="Write a comment (optional)">
+        <label for="visibleInput" class="d-block" i18n>Visible</label> 
+        <input type="checkbox" [(ngModel)]="newAttraction.visible" name="visible" id="visibleInput" rows="3" class="form-check-input mb-3" placeholder="Write a comment (optional)" i18n-placeholder>
       </div>
       <div>
-        <label for="descriptionInput">Description</label>
-        <textarea [(ngModel)]="newAttraction.description" name="description" id="descriptionInput" rows="3" class="form-control mb-3" placeholder="Write a comment (optional)"></textarea>
+        <label for="descriptionInput" i18n>Description</label>
+        <textarea [(ngModel)]="newAttraction.description" name="description" id="descriptionInput" rows="3" class="form-control mb-3" placeholder="Write a comment (optional)" i18n-placeholder></textarea>
       </div>
 		</form>
 	</div>
 
 	<div class="modal-footer">
-		<button type="button" class="btn btn-outline-secondary" (click)="modal.close('Cross click')">Cancel</button>
-		<button type="button" class="btn btn-primary" (click)="modal.close('Save click')">Create</button>
+		<button type="button" class="btn btn-outline-secondary" (click)="modal.close('Cross click')" i18n>Cancel</button>
+		<button type="button" class="btn btn-primary" (click)="modal.close('Save click')" i18n>Create</button>
 	</div>
 </ng-template>
 
@@ -83,17 +83,17 @@
 <ng-template #delete let-modal>
 
 	<div class="modal-header">
-		<h4 class="modal-title" id="modal-basic-title">Attraction deletion</h4>
+		<h4 class="modal-title" id="modal-basic-title" i18n>Attraction deletion</h4>
 		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
 	</div>
 
 	<div class="modal-body">
-    <p>Are you sure you want to delete this attraction?</p>
-    <p>All information associated to this attraction will be permanently deleted. This operation can not be undone.</p>
+    <p i18n>Are you sure you want to delete this attraction?</p>
+    <p i18n>All information associated to this attraction will be permanently deleted. This operation can not be undone.</p>
 	</div>
 
 	<div class="modal-footer">
-		<button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('Cross click')">Cancel</button>
-		<button type="button" class="btn btn-danger" (click)="modal.close('Save click')">Delete</button>
+		<button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('Cross click')" i18n>Cancel</button>
+		<button type="button" class="btn btn-danger" (click)="modal.close('Save click')" i18n>Delete</button>
 	</div>
 </ng-template>

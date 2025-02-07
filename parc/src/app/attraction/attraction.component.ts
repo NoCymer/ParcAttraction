@@ -8,7 +8,7 @@ import { ReviewService } from '../Service/review.service';
 import { ReviewInterface } from '../Interface/review.interface';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';$localize:`Anonymous`
 
 @Component({
   selector: 'attraction',
@@ -61,7 +61,8 @@ export class AttractionComponent {
 
   reviewDisplayName(review: ReviewInterface) {
     let isAnonymous = !review.surname || !review.name;
-    return (isAnonymous ? "Anonymous" : `${review.name} ${review.surname}`)
+    let anonymousStr = $localize`Anonymous`;
+    return (isAnonymous ? anonymousStr  : `${review.name} ${review.surname}`)
   }
 
   submitReview() {
