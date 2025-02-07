@@ -16,6 +16,6 @@ def add_attraction_review(id, data):
     return id
   
 def get_attraction_reviews(id):    
-  json = req.select_from_db("SELECT * FROM review WHERE attraction_id=?",(id))
+  json = req.select_from_db("SELECT * FROM review WHERE attraction_id=?",(id,))
   
   return json
