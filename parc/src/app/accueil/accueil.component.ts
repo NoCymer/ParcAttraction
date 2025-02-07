@@ -14,8 +14,7 @@ import { MatCardModule } from '@angular/material/card';
 })
 export class AccueilComponent {
 
-  constructor(public attractionService: AttractionService)
-  {}
+  constructor(public attractionService: AttractionService) {}
   
   public attractions: Observable<AttractionInterface[]> = this.attractionService.getAllAttraction()
 }

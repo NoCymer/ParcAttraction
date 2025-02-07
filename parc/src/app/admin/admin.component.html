@@ -1,43 +1,45 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>Page administrateur pour <button mat-button (click)="addAttraction()">Ajouter</button>, modifier et supprimer des attractions</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <div class="attraction-title">
-      <div class="attraction">
-        <span>Nom de l'attraction</span>
-        <span>Description de l'attraction</span>
-        <span>Difficulté de l'attraction / 5</span>
-        <span>Visible</span>
-      </div>
-    </div>
+<div class="card">
+  <div class="card-header">
+    <h5 class="card-title"i18n>
+      Admin page to add, edit and delete attractions
+    </h5>
+  </div>
+  <button class="btn btn-primary" (click)="addAttraction()"i18n>Ajouter</button>,
+  <div class="card-body">
     <ng-container *ngIf="attractions | async">
-      <ng-container *ngFor="let formulaireAttraction of formulaireAttractions; let indexForm = index;"
-        [formGroup]="formulaireAttraction"
-        style="display: flex; flex-direction: column;"
-      >
-        <div class="attraction">
-          <mat-form-field class="champ" appearance="fill">
-            <mat-label>Nom</mat-label>
-            <input matInput formControlName="nom">
-          </mat-form-field>
-      
-          <mat-form-field class="champ" appearance="fill">
-            <mat-label>Description</mat-label>
-            <input matInput formControlName="description">
-          </mat-form-field>
-  
-          <mat-form-field class="champ" appearance="fill">
-            <mat-label>Difficulté / 5</mat-label>
-            <input matInput formControlName="difficulte" type="number">
-          </mat-form-field>
-
-          <mat-slide-toggle class="champ" formControlName="visible">Element visible</mat-slide-toggle>
-
-          <button mat-button (click)="onSubmit(formulaireAttraction)" class="champ">Enregistrer</button>
-        </div>
-      </ng-container>
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th i18n>Name of the attraction</th>
+            <th i18n>Description</th>
+            <th i18n>Difficulty / 5</th>
+            <th i18n>Visible</th>
+            <th i18n>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let formulaireAttraction of formulaireAttractions; let indexForm = index;"
+            [formGroup]="formulaireAttraction">
+            <tr>
+              <td>
+                <input type="text" class="form-control" formControlName="nom">
+              </td>
+              <td>
+                <input type="text" class="form-control" formControlName="description">
+              </td>
+              <td>
+                <input type="number" class="form-control" formControlName="difficulte">
+              </td>
+              <td class="text-center">
+                <input class="form-check-input" type="checkbox" formControlName="visible">
+              </td>
+              <td>
+                <button class="btn btn-success" (click)="onSubmit(formulaireAttraction)" i18n>Save</button>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
     </ng-container>
-  </mat-card-content>
-</mat-card>
-
+  </div>
+</div>
