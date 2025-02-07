@@ -58,11 +58,9 @@ def deleteAttraction(index):
     checkToken = user.check_token(request)
     if (checkToken != True):
         return checkToken
-
-    json = request.get_json()
     
     if (attraction.delete_attraction(index)):
-        return "Element supprimé.", 200
+        return '',200
     return jsonify({"message": "Erreur lors de la suppression."}), 500
 
 @app.post('/login')
