@@ -4,23 +4,26 @@
     <div class="card-body" *ngIf="attraction | async as attractionData">
       <h3 class="card-title" id="attractionName">{{attractionData.nom}}</h3>
       <p class="card-text" id="attractionDescription">{{attractionData.description}}</p>
-      <p class="card-text"i18n >Difficulty : {{attractionData.difficulte}} / 5</p>
+      <p class="card-text">{{ 'attraction.difficulty' | translate:{value: attractionData.difficulte} }}</p>
 
       <!-- Add Rating Popover -->
-      <button id="addRatingBtn" type="button" class="btn btn-primary" (click)="open(content)" title="Add your rating" i18n>
-        Add Review
+      <button id="addRatingBtn" type="button" class="btn btn-primary" (click)="open(content)" title="Add your rating">
+        {{ 'attraction.addReview' | translate}}
       </button>
 
       <!-- Display Rating History -->
       <ng-container *ngIf="reviews | async as reviewsData">
         <div class="mt-4"  *ngIf="reviewsData.length > 0">
-          <h5 i18n>Rating</h5>
+          <h5>{{ 'attraction.rating' | translate}}</h5>
           <p>{{reviewAverageScore(reviewsData)}} / 5</p>
-          <h5 i18n>Reviews</h5>
-  
+          <h5>{{ 'attraction.reviews' | translate}}</h5>
+   
           <ul id="ratingHistory" class="list-group">
             <ng-container *ngFor="let review of reviewsData">
-              <li class="list-group-item"><p i18n class="fw-bold">{{reviewDisplayName(review)}} - Rating: {{review.rating}} / 5 </p><p>{{review.comment}}</p></li>
+              <li class="list-group-item">
+                <p class="fw-bold">{{ 'attraction.reviewHeader' | translate:{name: reviewDisplayName(review), rating: review.rating} }}</p>
+                <p>{{review.comment}}</p>
+              </li>
             </ng-container>
           </ul>
         </div>
@@ -32,32 +35,32 @@
 <ng-template #content let-modal>
 
 	<div class="modal-header">
-		<h4 class="modal-title" id="modal-basic-title" i18n>Add a review</h4>
+		<h4 class="modal-title" id="modal-basic-title">{{ 'attraction.addReviewModal.addReview' | translate}}</h4>
 		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
 	</div>
 
 	<div class="modal-body">
 		<form>
       <div>
-        <label for="nameInput" i18n>First Name (optional)</label>
-        <input [(ngModel)]="newReview.name" type="text" id="nameInput" name="name" class="form-control mb-3" placeholder="Enter your first name (optional)" i18n-placeholder>
+        <label for="nameInput">{{ 'attraction.addReviewModal.firstname' | translate}}</label>
+        <input [(ngModel)]="newReview.name" type="text" id="nameInput" name="name" class="form-control mb-3" placeholder="{{ 'attraction.addReviewModal.firstnamePlaceholder' | translate}}">
       </div>
       <div>
-        <label for="surnameInput" i18n>Surname (optional)</label>
-        <input [(ngModel)]="newReview.surname" type="text" id="surnameInput" name="surname" class="form-control mb-3" placeholder="Enter your surname (optional)" i18n-placeholder>
+        <label for="surnameInput">{{ 'attraction.addReviewModal.lastname' | translate}}</label>
+        <input [(ngModel)]="newReview.surname" type="text" id="surnameInput" name="surname" class="form-control mb-3" placeholder="{{ 'attraction.addReviewModal.lastnamePlaceholder' | translate}}">
       </div>
       <div>
-        <label for="ratingInput" i18n>Rate the Attraction</label>
-        <input [(ngModel)]="newReview.rating" type="number" name="rating" id="ratingInput" min="1" max="5" class="form-control mb-3" placeholder="Rate from 1 to 5" i18n-placeholder>
+        <label for="ratingInput">{{ 'attraction.addReviewModal.rate' | translate}}</label>
+        <input [(ngModel)]="newReview.rating" type="number" name="rating" id="ratingInput" min="1" max="5" class="form-control mb-3">
       </div>
       <div>
-        <label for="commentInput" i18n>Comment (optional)</label>
-        <textarea [(ngModel)]="newReview.comment" name="comment" id="commentInput" rows="3" class="form-control mb-3" placeholder="Write a comment (optional)" i18n-placeholder></textarea>
+        <label for="commentInput">{{ 'attraction.addReviewModal.comment' | translate}}</label>
+        <textarea [(ngModel)]="newReview.comment" name="comment" id="commentInput" rows="3" class="form-control mb-3" placeholder="{{ 'attraction.addReviewModal.commentPlaceholder' | translate}}"></textarea>
       </div>
 		</form>
 	</div>
 
 	<div class="modal-footer">
-		<button type="button" class="btn btn-success" (click)="modal.close('Save click')" i18n>Submit Review</button>
+		<button type="button" class="btn btn-success" (click)="modal.close('Save click')">{{ 'attraction.addReviewModal.submit' | translate}}</button>
 	</div>
 </ng-template>

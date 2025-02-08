@@ -7,11 +7,12 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { TranslateDirective, TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, MatCardModule, MatButtonModule, MatFormFieldModule, MatInputModule],
+  imports: [ReactiveFormsModule, MatCardModule, MatButtonModule, MatFormFieldModule, MatInputModule, TranslatePipe, TranslateDirective],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -24,8 +25,11 @@ export class LoginComponent {
     password: ['', Validators.required],
   });
 
-  constructor(public authService: AuthService, public router: Router) {
-  }
+  constructor(
+    public authService: AuthService,
+    public router: Router,
+    private translate: TranslateService
+  ) {}
 
   public login() {
 

@@ -1,19 +1,19 @@
 <div class="w-full d-flex justify-content-center mt-5">
   <div class="card" style="width: 25rem;">
     <div class="card-header">
-      <h5 class="card-title"i18n>Admin page login</h5>
+      <h5 class="card-title">{{ 'login.title' | translate }}</h5>
     </div>
     <div class="card-body">
       <form [formGroup]="form" (ngSubmit)="login()" class="form">
         <div class="mb-3">
-          <label for="name" class="form-label" i18n>Name</label>
+          <label for="name" class="form-label">{{ 'login.name' | translate }}</label>
           <input type="text" class="form-control" id="name" formControlName="name">
         </div>
         <div class="mb-3">
-          <label for="password" class="form-label" i18n>Password</label>
+          <label for="password" class="form-label">{{ 'login.password' | translate }}</label>
           <input type="password" class="form-control" id="password" formControlName="password">
         </div>
-        <button type="submit" class="btn btn-outline-primary" i18n>Login</button>
+        <button type="submit" class="btn btn-outline-primary">{{ 'login.login' | translate }}</button>
       </form>
     </div>
   </div>

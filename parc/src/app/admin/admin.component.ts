@@ -11,11 +11,12 @@ import { MatButtonModule } from '@angular/material/button';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateDirective, TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatSlideToggleModule, MatButtonModule, MatCardModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatSlideToggleModule, MatButtonModule, MatCardModule, FormsModule, TranslatePipe, TranslateDirective],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss'
 })
@@ -26,6 +27,7 @@ export class AdminComponent {
 
   constructor(
     public attractionService: AttractionService,
+    private translate: TranslateService,
     public formBuilder: FormBuilder,
     private _snackBar: MatSnackBar,
     public modalService: NgbModal,

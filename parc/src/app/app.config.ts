@@ -1,11 +1,17 @@
 import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { authInterceptor } from './Interceptor/auth.interceptor';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideZoneChangeDetection} from "@angular/core";
-import {provideTranslateService} from "@ngx-translate/core";
+import {provideTranslateService, TranslateLoader} from "@ngx-translate/core";
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/locales/', '.json');
+}
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,7 +20,12 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptors([authInterceptor])),
     provideAnimations(),
     provideTranslateService({
-     defaultLanguage: 'en'
+     defaultLanguage: 'en',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
     })
   ],
 };

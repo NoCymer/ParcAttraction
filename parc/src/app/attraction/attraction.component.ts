@@ -8,12 +8,13 @@ import { ReviewService } from '../Service/review.service';
 import { ReviewInterface } from '../Interface/review.interface';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';$localize:`Anonymous`
+import { ActivatedRoute } from '@angular/router';
+import { TranslateDirective, TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'attraction',
   standalone: true,
-  imports: [CommonModule, MatCardModule, FormsModule],
+  imports: [CommonModule, MatCardModule, FormsModule, TranslatePipe, TranslateDirective],
   templateUrl: './attraction.component.html',
   styleUrl: './attraction.component.scss'
 })
@@ -27,6 +28,7 @@ export class AttractionComponent {
     public attractionService: AttractionService,
     public reviewService: ReviewService,
     public modalService: NgbModal,
+    private translate: TranslateService,
     public route: ActivatedRoute
   ) {}
 

@@ -23,12 +23,12 @@ export class AppComponent {
   constructor(
     public authService: AuthService,
     public router: Router,
-    private translate: TranslateService
+    private translate: TranslateService,
   ) {
     this.translate.addLangs(['fr', 'en']);
     this.translate.setDefaultLang('en');
-    this.translate.use('en');
-    this.authService.setUser()
+    this.translate.use(this.currentLang);
+    this.authService.setUser();
   }
 
   logout() {
@@ -39,7 +39,6 @@ export class AppComponent {
   switchLanguage(event: Event) {
     let lang: string = (event.target as HTMLSelectElement).value;
     localStorage.setItem('lang', lang);
-    const baseUrl = window.location.origin;
-    window.location.href = `${baseUrl}/${lang}/`;
+    this.translate.use(lang);
   }
 }
