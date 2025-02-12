@@ -18,7 +18,8 @@ export class AccueilComponent {
 
   constructor(
     public attractionService: AttractionService,
-    public router: Router
+    public router: Router,
+    private translate: TranslateService 
   ) {}
   
   public attractions: Observable<AttractionInterface[]> = this.attractionService.getAllAttraction()
