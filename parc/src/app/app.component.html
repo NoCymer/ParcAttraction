@@ -22,7 +22,7 @@
       <button (click)="logout()" class="btn btn-primary">{{ 'app.titlebar.logout' | translate }}</button>
     </li>
     <li *ngIf="!authService.isLoggedIn">
-      <a routerLink="/login" class="btn btn-primary">{{ 'app.titlebar.logout' | translate }}</a>
+      <a routerLink="/login" class="btn btn-primary">{{ 'app.titlebar.login' | translate }}</a>
     </li>
   </ul>
 </nav>
